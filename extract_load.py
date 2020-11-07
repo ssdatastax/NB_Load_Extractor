@@ -65,17 +65,53 @@ read_threshold = .85
 write_threshold = .85
 include_yaml = 0
 new_dc = "'DC1':'3'"
+show_help = ''
 # new_dc = ''
 
 for argnum,arg in enumerate(sys.argv):
-  if(arg=="-u"):
+  if(arg=='-h' or arg =='--help'):
+    show_help = 'y'
+  elif(arg=='-p'):
     data_url.append(sys.argv[argnum+1])
-  elif(arg=="-rt"):
+  elif(arg=='-rt'):
     read_threshold = float(sys.argv[argnum+1])/100
-  elif(arg=="-wt"):
+  elif(arg=='-wt'):
     write_threshold = float(sys.argv[argnum+1])/100
-  elif(arg=="-inc_yaml"):
+  elif(arg=='-inc_yaml'):
     include_yaml = 1
+  
+if show_help:
+  help_content = \
+  'usage: extract_load.py [-h] [--help] [-inc_yaml]\n'\
+  '                       [-p PATH_TO_DIAG_FOLDER]\n'\
+  '                       [-rt READ_THRESHOLD]\n'\
+  '                       [-wt WRITE_THRESHOLD]\n'\
+  'oprional arguments:\n'\
+  '-h, --help             This help info\n'\
+  '-p                     Path to the diagnostics folder\n'\
+  '                        Multiple diag folders accepted\n'\
+  '                        i.e. -p PATH1 -p PATH2 -p PATH3\n'\
+  '-rt                    Defines percentage of read load\n'\
+  '                        to be included in the output\n'\
+  '                        Default: 85%\n'\
+  '                        i.e. -rt 100\n'\
+  '-wt                    Defines percentage of write load\n'\
+  '                        to be included in the output\n'\
+  '                        Default: 85%\n'\
+  '                        i.e. -wt 100\n'\
+  '-inc_yaml              Include writing yaml files\n'\
+  '                        CLUSTER_NAME_schema.yaml\n'\
+  '                         This file is used to create\n'\
+  '                         the schema with NoSQLBench\n'\
+  '                        CLUSTER_NAME_initial_load.yaml\n'\
+  '                         This file is used to create\n'\
+  '                         the initial load of read tables\n'\
+  '                         with NoSQLBench\n'\
+  '                        CLUSTER_NAME_load.yaml\n'\
+  '                         This file is used to create\n'\
+  '                         ongoing load with NoSQLBench\n'
+  exit(help_content)
+
 
 for cluster_url in data_url:
   is_index = 0

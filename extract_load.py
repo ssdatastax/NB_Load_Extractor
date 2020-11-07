@@ -34,8 +34,10 @@ def schemaTag(writeFile,tagType,level,ks,tbl,cql):
   writeFile.writelines(['\n','    statements:\n','      - |\n        '+cql+'\n\n'])
 
 def rwTag(writeFile,rwCQL,ks,tbl,tbl_info,ratio='n'):
-  writeFile.writelines(['  - tags:\n','      phase: '+rwCQL+'_'+ks+'_'+tbl+'\n'])
-  if ratio == 'y':
+  if ratio == 'n':
+    writeFile.writelines(['  - tags:\n','      phase: '+rwCQL+'_'+ks+'_'+tbl+'\n'])
+  elif ratio == 'y':
+    writeFile.writelines(['  - tags:\n','      phase: load_'+rwCQL+'_'+ks+'_'+tbl+'\n'])
     ratio_val = str(int(tbl_info['ratio'][rwCQL]*1000))
     writeFile.writelines(['    params:\n','      ratio: ',ratio_val,'\n'])
   writeFile.writelines(['    statements:\n','      - |\n        '])

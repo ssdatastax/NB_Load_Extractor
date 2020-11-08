@@ -61,7 +61,7 @@ There are three tabs of data in this spreadsheet.
 * Columns A-D lists the table read information.
 * Columns F-I lists the table write information. 
 
-*Note: Remember this may not include all the tables which have reads.  The read and/or write threshold argument may be limiting the tables to only include the top 80% if -rt 80 -wt 80 was used in the command.*
+*Note: Remember this may not include all the tables which have reads.  The read and/or write threshold argument may be limiting the data to only include the top tables. For example, tables only include the top 80% if -rt 80 -wt 80 was used in the command or the top 85% if the -rt and -rw commands were not used.*
 * Columns K-N lists the table read and write percent of the total included (threshold data only) RW traffic.
 
 ### *Field Data* Tab

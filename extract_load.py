@@ -112,7 +112,6 @@ if show_help:
   '                         ongoing load with NoSQLBench\n'
   exit(help_content)
 
-
 for cluster_url in data_url:
   is_index = 0
   read_subtotal = 0
@@ -239,7 +238,7 @@ for cluster_url in data_url:
   write_count.sort(reverse=True,key=sortFunc)
 
   #Create Cluster GC Spreadsheet
-  workbook = xlsxwriter.Workbook(cluster_url + "/" + cluster_name + "_" + "io_data" + '.xlsx')
+  workbook = xlsxwriter.Workbook(cluster_url + "/" + cluster_name + "_" + "load_data" + '.xlsx')
   worksheet = workbook.add_worksheet('RW Data')
 
   header_format1 = workbook.add_format({

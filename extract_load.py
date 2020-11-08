@@ -2,7 +2,6 @@
 
 #pip install xlsxwriter
 #pip install Pandas
-#sample commandline: python io_data.py -u "/Users/stevensmith/Documents/BestBuy/fulfillment-diagnostics-2020_08_04_16_50_46_UTC"
 
 def sortFunc(e):
   return e['count']
@@ -136,7 +135,11 @@ for cluster_url in data_url:
       table = ""
       dc = ""
       cfstat = rootPath + node + "/nodetool/cfstats"
-      cfstatFile = open(cfstat, "r")
+      tablestat = rootPath + node + "/nodetool/tablestats"
+      try:
+        cfstatFile = open(cfstat, "r")
+      except:
+        cfstatFile = open(tablestat, "r")
       clusterpath = rootPath + node + "/nodetool/describecluster"
       cluster_name = get_param(clusterpath,"Name:",1)
       ks = ''

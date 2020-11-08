@@ -45,7 +45,7 @@ python extract_load.py -p [path_to_diag_folder] -inc_yaml
 Many times, a few tables handle most of the read and write traffic.  Replicating the load on these main tables usually requires significantly less time than replicating the entire load.  this is due to the increased number of binding statements required to create on the entire load. For example, it may take 200 binding statements to run an entire cluster, where only 30 are required to use on the main tables.  For this reason, the -rt read threshold and -wt write threshold arguments were created.  By limited the read threshold to 85%, the number of binding statements needed are usually significantly reduced without effecting the load testing (in most cases).  The default values of -rt and -wt are 85%.
 Changing the -rt to 95% and the -wt to 98%:
 ```
-python extract_load.py -p [path_to_diag_folder] -rt 95 -wt 98%
+python extract_load.py -p [path_to_diag_folder] -rt 95 -wt 98
 ```
 
 #### Help

@@ -13,9 +13,9 @@
 <!-- SUMMARY -->
 ## Summary
 
-This script was designed to suppliment NoSQLBench by identifying primary application load tables with read/write ratios based on data from the DSE OpsCenter diagnostic tarball.  It produces a Excel spreadsheet with read and write traffic totals for application tables in the Cassandra cluster.  It also includes a list of fields identifying primary keys and field types.  There is also an option to create yaml files to be used by NoSQLBench.
+This script was designed to supplement NoSQLBench by identifying primary application load tables with read/write ratios based on data from the DSE OpsCenter diagnostic tarball.  It produces a Excel spreadsheet with read and write traffic totals for application tables in the Cassandra cluster.  It also includes a list of fields identifying primary keys and field types.  There is also an option to create yaml files to be used by NoSQLBench.
 
-This script is also very helpful with identifying the table traffic volumes.  For example, if a table with a large partition is rarely used, fixing it may not signifantly improve performance.  On the other hand, if a table with reads that total 55% of the cluster's total read/write transactions has a high number of SSTables, this may be significantly effecting overall cluster performance.
+This script is also very helpful with identifying the table traffic volumes.  For example, if a table with a large partition is rarely used, fixing it may not signifantly improve performance.  On the other hand, if a table with reads that total 55% of the cluster's total read/write transactions has a high number of SSTables, this may be significantly affecting overall cluster performance.
 
 <!-- GETTING STARTED -->
 ## Getting Started

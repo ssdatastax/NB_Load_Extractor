@@ -120,7 +120,7 @@ Opscenter is the easiest way to collect a diagnostic tarbal. Download a compress
 
 ### Manual Diagnostic Collection
 Collect the following from all nodes and place the outputs/files in a directory with the node's IP address as the directory name:
-* nodetool cfstats > ./nodetool/cfstats
+* nodetool tablestats > ./nodetool/tablestats
 * nodetool describecluster > ./nodetool/describecluster
 * cqlsh -e "describe full schema;" > ./driver/schema
 

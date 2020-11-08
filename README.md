@@ -30,7 +30,7 @@ the cluster load data spreadsheet run the following command:
 ```
 python extract_load.py -p [path_to_diag_folder]
 ```
-You may run the script on multiple diagnostic folders at a time:
+You may run the script on multiple diagnostic folders:
 ```
 python extract_load.py -p [path_to_diag_folder1] -p [path_to_diag_folder2] -p [path_to_diag_folder3]
 ```

@@ -60,6 +60,7 @@ There are three tabs of data in this spreadsheet.
 ### *RW Data* Tab
 * Columns A-D lists the table read information.
 * Columns F-I lists the table write information. 
+
 *Note: Remember this may not include all the tables which have reads.  The read and/or write threshold argument may be limiting the tables to only include the top 80% if -rt 80 -wt 80 was used in the command.*
 * Columns K-N lists the table read and write percent of the total included (threshold data only) RW traffic.
 
@@ -83,7 +84,8 @@ This tab would contain the list of values with fields where column G has been ma
 ## NoSQLBench YAML Files
 This application automatically creates three yaml files to be used in for NoSQLBench (NB).
 [Learn more about the NoSQLBench project](https://www.datastax.com/blog/nosqlbench)
-*NOTE: if using different DC(s) than are in the diagnostic files, make sure to include the correct DC name(s) in the new_dc variable* 
+
+*NOTE: If using different DC(s) than are in the diagnostic files, make sure to include the correct DC name(s) in the new_dc variable* 
 
 ### *Schema* YAML
 This script is used to create the cluster's schema.

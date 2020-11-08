@@ -27,22 +27,22 @@ After cloning the NB Load Extractor project, download a diagnostic tarball from 
 #### Creating the Cluster Load Spreadsheet
 To create the 
 the cluster load data spreadsheet run the following command:
-'''python extract_load.py -p [path_to_diag_folder]'''
+```python extract_load.py -p [path_to_diag_folder]```
 You may run the script on multiple diagnostic folders at a time:
-'''python extract_load.py -p [path_to_diag_folder1] -p [path_to_diag_folder2] -p [path_to_diag_folder3]'''
+```python extract_load.py -p [path_to_diag_folder1] -p [path_to_diag_folder2] -p [path_to_diag_folder3]```
 
 #### Creating the NoSQLBench YAML Files
 To include the NoSQLBench yaml files:
-'''python extract_load.py -p [path_to_diag_folder] -inc_yaml'''
+```python extract_load.py -p [path_to_diag_folder] -inc_yaml```
 
 #### Modifying Read/Write Load included in Documents
 Many times, a few tables handle most of the read and write traffic.  Replicating the load on these main tables usually requires significantly less time than replicating the entire load.  this is due to the increased number of binding statements required to create on the entire load. For example, it may take 200 binding statements to run an entire cluster, where only 30 are required to use on the main tables.  For this reason, the -rt read threshold and -wt write threshold arguments were created.  By limited the read threshold to 85%, the number of binding statements needed are usually significantly reduced without effecting the load testing (in most cases).  The default values of -rt and -wt are 85%.
 Changing the -rt to 95% and the -wt to 98%:
-'''python extract_load.py -p [path_to_diag_folder] -rt 95 -wt 98%'''
+```python extract_load.py -p [path_to_diag_folder] -rt 95 -wt 98%```
 
 #### Help
 There is a brief help info section:
-'''python extract_load.py --help'''
+```python extract_load.py --help```
 
 ## Using the Cluster Load Spreadsheet
 There are three tabs of data in this spreadsheet.  
@@ -78,20 +78,20 @@ This application automatically creates three yaml files to be used in for NoSQLB
 ### *Schema* YAML
 This script is used to create the cluster's schema.
 Example NB command line to create keyspace, tables and indexes
-'''../nb run type=cql yaml=[cluster_name]_schema tags=phase:create_schema.* host=[Single Node IP] threads=1'''
-'''../nb run type=cql yaml=[cluster_name]_schema tags=phase:create_table.* host=[Single Node IP] threads=1'''
+```../nb run type=cql yaml=[cluster_name]_schema tags=phase:create_schema.* host=[Single Node IP] threads=1```
+```../nb run type=cql yaml=[cluster_name]_schema tags=phase:create_table.* host=[Single Node IP] threads=1```
 Example NB command line to drop keyspace
-'''../nb run type=cql yaml=[cluster_name]_schema tags=phase:drop_schema.* host=[Single Node IP] threads=1'''
+```../nb run type=cql yaml=[cluster_name]_schema tags=phase:drop_schema.* host=[Single Node IP] threads=1```
 
 ### *Initial Load* YAML
 This script is used to initially load the cluster's read tables.
 Example NB command line
-'''../nb run type=cql yaml=[cluster_name]_initial_load tags=phase:write_[keyspace]_[table] host=[Single Node IP] cycles=[number of records]'''
+```../nb run type=cql yaml=[cluster_name]_initial_load tags=phase:write_[keyspace]_[table] host=[Single Node IP] cycles=[number of records]```
 
 ### *Load* YAML
 This script is used to simulate and actual load on the cluster based on the traffic in the diagnostic files.
 Example NB command line
-'''../nb run type=cql yaml=[cluster_name]_load tags=phase:load.* host=[ALL Node IPs] cycles=[very large number i.e. 10B] cyclerate=[Controll TPS Here]'''
+```../nb run type=cql yaml=[cluster_name]_load tags=phase:load.* host=[ALL Node IPs] cycles=[very large number i.e. 10B] cyclerate=[Controll TPS Here]```
 
 ## Collecting Diagnostic Data
 

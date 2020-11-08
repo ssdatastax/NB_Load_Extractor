@@ -116,31 +116,12 @@ nb run type=cql yaml=[cluster_name]_load tags=phase:load.* host=[ALL Node IPs] c
 ## Collecting Diagnostic Data
 
 ### Automated Diagnostic Collection through OpsCenter
-Opscenter is the easiest way to collect a diagnostic tarbal. Download a compressed tarball that contains diagnostic information about the OpsCenter daemon and all the nodes in a specific cluster. [Instructions Here]https://docs.datastax.com/en/opscenter/6.7/opsc/online_help/opscCollectingDiagnosticData_t.html 
+Opscenter is the easiest way to collect a diagnostic tarbal. Download a compressed tarball that contains diagnostic information about the OpsCenter daemon and all the nodes in a specific cluster. [Instructions Here](https://docs.datastax.com/en/opscenter/6.7/opsc/online_help/opscCollectingDiagnosticData_t.html)
 
 ### Manual Diagnostic Collection
 Collect the following from all nodes and place the outputs/files in a directory with the node's IP address as the directory name:
-* system.log (also collect all the system files) (should be placed under "log" direcotry)
-* debug.log (should be placed under "log" direcotry)
-* cassandra.yaml (should be placed under "conf" direcotry)
-* dse.yaml (should be placed under "conf" direcotry)
-* cassandra-env.sh
-output of:
-* nodetool status > ./nodetool/status
-* nodetool info > ./nodetool/info
 * nodetool cfstats > ./nodetool/cfstats
-* nodetool compactionstats > ./nodetool/compactionstats
 * nodetool describecluster > ./nodetool/describecluster
-* nodetool gossipinfo > ./nodetool/gossipinfo
-* nodetool proxyhistograms > ./nodetool/proxyhistograms
-* nodetool netstats > ./nodetool/netstats
-* nodetool tpstats > ./nodetool/tpstats
-* nodetool version > ./nodetool/version
-* dsetool ring > ./dsetool/ring
-* dsetool status > ./dsetool/status
-* java -version > java-version.txt
-* free -m > free-m.txt
-* df -h > df-h.txt
 * cqlsh -e "describe full schema;" > ./driver/schema
 
 ## Acknowledgements

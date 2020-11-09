@@ -249,12 +249,20 @@ for cluster_url in data_url:
       'italic' : True,
       'text_wrap': False,
       'font_size': 14,
+      'border': 1,
       'valign': 'top'})
 
   header_format2 = workbook.add_format({
       'bold': True,
       'text_wrap': False,
       'font_size': 12,
+      'border': 1,
+      'valign': 'top'})
+
+  data_format = workbook.add_format({
+      'text_wrap': False,
+      'font_size': 11,
+      'border': 1,
       'valign': 'top'})
 
   row=0
@@ -278,10 +286,10 @@ for cluster_url in data_url:
         table_totals[ks] = {}
       table_totals[ks][tbl] = {'reads':cnt,'writes':'n/a'}
       read_subtotal += cnt
-      worksheet.write(row,column,ks)
-      worksheet.write(row,column+1,tbl)
-      worksheet.write(row,column+2,cnt)
-      worksheet.write(row,column+3,round(float(cnt)/total_reads*100,3))
+      worksheet.write(row,column,ks,data_format)
+      worksheet.write(row,column+1,tbl,data_format)
+      worksheet.write(row,column+2,cnt,data_format)
+      worksheet.write(row,column+3,round(float(cnt)/total_reads*100,3),data_format)
       row+=1
 
   perc_writes = 0.0
@@ -303,10 +311,10 @@ for cluster_url in data_url:
       except:
         table_totals[ks][tbl] = {'reads':'n/a','writes':cnt}
       write_subtotal += writes['count']
-      worksheet.write(row,column,ks)
-      worksheet.write(row,column+1,tbl)
-      worksheet.write(row,column+2,cnt)
-      worksheet.write(row,column+3,round(float(cnt)/total_writes*100,3))
+      worksheet.write(row,column,ks,data_format)
+      worksheet.write(row,column+1,tbl,data_format)
+      worksheet.write(row,column+2,cnt,data_format)
+      worksheet.write(row,column+3,round(float(cnt)/total_writes*100,3),data_format)
       row+=1
 
   row = 1
@@ -314,19 +322,19 @@ for cluster_url in data_url:
   subtotal_count = write_subtotal+read_subtotal;
   for ks,ks_info in table_totals.items():
     for tbl,tbl_info in ks_info.items():
-      worksheet.write(row,column,ks)
-      worksheet.write(row,column+1,tbl)
+      worksheet.write(row,column,ks,data_format)
+      worksheet.write(row,column+1,tbl,data_format)
       tbl_data[ks][tbl]['ratio']={}
       if (isinstance(tbl_info['reads'],int)):
         tbl_data[ks][tbl]['ratio']['read']=round(float(tbl_info['reads'])/subtotal_count*100,3)
-        worksheet.write(row,column+2,tbl_data[ks][tbl]['ratio']['read'])
+        worksheet.write(row,column+2,tbl_data[ks][tbl]['ratio']['read'],data_format)
       else:
-        worksheet.write(row,column+2,tbl_info['reads'])
+        worksheet.write(row,column+2,tbl_info['reads'],data_format)
       if (isinstance(tbl_info['writes'],int)):
         tbl_data[ks][tbl]['ratio']['write']=round(float(tbl_info['writes'])/subtotal_count*100,3)
-        worksheet.write(row,column+3,tbl_data[ks][tbl]['ratio']['write'])
+        worksheet.write(row,column+3,tbl_data[ks][tbl]['ratio']['write'],data_format)
       else:
-        worksheet.write(row,column+3,tbl_info['writes'])
+        worksheet.write(row,column+3,tbl_info['writes'],data_format)
       row+=1
 
   worksheet2 = workbook.add_worksheet('Field Data')
@@ -343,14 +351,14 @@ for cluster_url in data_url:
     for tbl,tbl_info in ks_info.items():
       try:
         for field_name,field_type in tbl_data[ks][tbl]['field'].items():
-          worksheet2.write(row,column,ks)
-          worksheet2.write(row,column+1,tbl)
-          worksheet2.write(row,column+2,field_name)
-          worksheet2.write(row,column+3,field_type)
+          worksheet2.write(row,column,ks,data_format)
+          worksheet2.write(row,column+1,tbl,data_format)
+          worksheet2.write(row,column+2,field_name,data_format)
+          worksheet2.write(row,column+3,field_type,data_format)
           if (field_name in tbl_data[ks][tbl]['pk']):
-            worksheet2.write(row,column+4,'x')
+            worksheet2.write(row,column+4,'x',data_format)
           if (field_name in tbl_data[ks][tbl]['cc']):
-            worksheet2.write(row,column+5,'x')
+            worksheet2.write(row,column+5,'x',data_format)
           row+=1
       except:
         print("Error2:"+ks+"."+tbl)

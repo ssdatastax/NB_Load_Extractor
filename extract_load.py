@@ -65,8 +65,7 @@ headers2_width=[11,25,25,8,8,8,9,7,25,25,25]
 read_threshold = .85
 write_threshold = .85
 include_yaml = 0
-new_dc = "'DC1':'3'"
-#new_dc = ''
+new_dc = ''
 show_help = ''
 
 for argnum,arg in enumerate(sys.argv):
@@ -80,7 +79,9 @@ for argnum,arg in enumerate(sys.argv):
     write_threshold = float(sys.argv[argnum+1])/100
   elif(arg=='-inc_yaml'):
     include_yaml = 1
-  
+  elif(arg=='-new_dc'):
+    new_dc = sys.argv[argnum+1]
+
 if show_help:
   help_content = \
   'usage: extract_load.py [-h] [--help] [-inc_yaml]\n'\
@@ -110,7 +111,9 @@ if show_help:
   '                         with NoSQLBench\n'\
   '                        CLUSTER_NAME_load.yaml\n'\
   '                         This file is used to create\n'\
-  '                         ongoing load with NoSQLBench\n'
+  '                         ongoing load with NoSQLBench\n'\
+  '-new_dc                 Use a different DC\n'\
+  '                         i.e. -new_dc "\'DC1\':\'3\'"'
   exit(help_content)
 
 for cluster_url in data_url:

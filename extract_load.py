@@ -58,14 +58,16 @@ def rwTag(writeFile,rwCQL,ks,tbl,tbl_info,ratio='n'):
 
 data_url = []
 omit_keyspace = ['OpsCenter','dse_insights_local','solr_admin','test','dse_system','system_auth','system_traces','system','dse_system_local','system_distributed','system_schema','dse_perf','dse_insights','dse_security','killrvideo','dse_leases']
-headers=["Keyspace","Table","Reads","% of Total Reads","","Keyspace","Table","Writes","% of Total Writes","","Keyspace","Table","Read % of Incl. Total RW","Write % of Incl. Total RW"]
-headers2=["Keyspace","Table","Field","Type","Partition Key","Clustering Column","Small List","Field Length","Data Pattern","Example","Binding Statement"]
+headers=["Keyspace","Table","Reads","% Reads","","Keyspace","Table","Writes","% Writes","","Keyspace","Table","Read % Incl. RW","Write % Incl. RW"]
+headers2=["Keyspace","Table","Field","Type","Part Key","Clust Col","Small List","Length","Data Pattern","Example","Binding"]
+headers_width=[11,25,13,9,3,11,25,13,9,3,11,25,16,17]
+headers2_width=[11,25,25,8,8,8,9,7,25,25,25]
 read_threshold = .85
 write_threshold = .85
 include_yaml = 0
 new_dc = "'DC1':'3'"
+#new_dc = ''
 show_help = ''
-# new_dc = ''
 
 for argnum,arg in enumerate(sys.argv):
   if(arg=='-h' or arg =='--help'):
@@ -244,6 +246,11 @@ for cluster_url in data_url:
   workbook = xlsxwriter.Workbook(cluster_url + "/" + cluster_name + "_" + "load_data" + '.xlsx')
   worksheet = workbook.add_worksheet('RW Data')
 
+  column=0
+  for col_width in headers_width:
+    worksheet.set_column(column,column,col_width)
+    column+=1
+
   header_format1 = workbook.add_format({
       'bold': True,
       'italic' : True,
@@ -268,7 +275,10 @@ for cluster_url in data_url:
   row=0
   column=0
   for header in headers:
-      worksheet.write(row,column,header,header_format1)
+      if header == '':
+        worksheet.write(row,column,header)
+      else:
+        worksheet.write(row,column,header,header_format1)
       column+=1
   
   perc_reads = 0.0
@@ -339,10 +349,18 @@ for cluster_url in data_url:
 
   worksheet2 = workbook.add_worksheet('Field Data')
 
+  column=0
+  for col_width in headers2_width:
+    worksheet2.set_column(column,column,col_width)
+    column+=1
+
   row=0
   column=0
   for header in headers2:
-      worksheet2.write(row,column,header,header_format1)
+      if header == '':
+        worksheet2.write(row,column,header)
+      else:
+        worksheet2.write(row,column,header,header_format1)
       column+=1
   
   row = 1
@@ -364,7 +382,7 @@ for cluster_url in data_url:
         print("Error2:"+ks+"."+tbl)
         error=1
         
-  worksheet3 = workbook.add_worksheet('Data Lists')
+  worksheet3 = workbook.add_worksheet('Small Lists')
 
   workbook.close()
 

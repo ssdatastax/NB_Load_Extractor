@@ -57,7 +57,7 @@ def rwTag(writeFile,rwCQL,ks,tbl,tbl_info,ratio='n'):
     writeFile.write(cql+'\n\n')
 
 data_url = []
-omit_keyspace = ['OpsCenter','dse_insights_local','solr_admin','test','dse_system','system_auth','system_traces','system','dse_system_local','system_distributed','system_schema','dse_perf','dse_insights','dse_security','killrvideo','dse_leases']
+omit_keyspace = ['OpsCenter','dse_insights_local','solr_admin','test','dse_system','system_auth','system_traces','system','dse_system_local','system_distributed','system_schema','dse_perf','dse_insights','dse_security','killrvideo','dse_leases','dsefs_c4z','HiveMetaStore','dse_analytics']
 headers=["Keyspace","Table","Reads","% Reads","","Keyspace","Table","Writes","% Writes","","Keyspace","Table","Read % Incl. RW","Write % Incl. RW"]
 headers2=["Keyspace","Table","Field","Type","Part Key","Clust Col","Small List","Length","Data Pattern","Example","Binding"]
 headers_width=[11,25,13,9,3,11,25,13,9,3,11,25,16,17]
